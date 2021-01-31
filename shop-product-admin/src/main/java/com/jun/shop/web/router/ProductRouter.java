@@ -17,6 +17,7 @@ public class ProductRouter {
 	public RouterFunction<ServerResponse> router(ProductHandler handler){
 		return RouterFunctions.route()
 		.route(RequestPredicates.POST("/products"), handler::createProduct)
+		.route(RequestPredicates.PATCH("/price-change"), handler::changePrice)
 		.build();
 	}
 }

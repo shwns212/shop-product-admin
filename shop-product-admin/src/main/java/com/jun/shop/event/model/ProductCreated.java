@@ -4,14 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jun.shop.event.model.ProductCreated.ProductOption.Option;
+import com.jun.shop.event.util.Identifier;
 import com.jun.shop.model.command.ProductCommand.Create.ProductOptionCommand;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
-public class ProductCreated extends Event {
+@NoArgsConstructor
+public class ProductCreated {
 	
+	@Identifier
+	private String id;
 	private String name;
 	private Integer price;
 	private List<ProductOption> options;
@@ -19,20 +24,22 @@ public class ProductCreated extends Event {
 	
 	@Getter
 	@AllArgsConstructor
+	@NoArgsConstructor
 	public static class ProductOption {
 		private Integer optionNo;
-		private List<Option> options; 
+		private List<Option> options;
 		private Integer additionalAmount;
 		
 		@Getter
 		@AllArgsConstructor
+		@NoArgsConstructor
 		public static class Option {
 			private String option;
 		}
 	}
 
-	public ProductCreated(Long id, String name, Integer price, List<ProductOptionCommand> options, String description) {
-		super(id);
+	public ProductCreated(String id, String name, Integer price, List<ProductOptionCommand> options, String description) {
+		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.description = description;

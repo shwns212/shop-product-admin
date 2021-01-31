@@ -2,13 +2,15 @@ package com.jun.shop.model.command;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 public class ProductCommand {
 
 	@Getter
 	public static class Create {
-		private Long id;
+		private String id;
 		private String name;
 		private Integer price;
 		private List<ProductOptionCommand> options;
@@ -25,5 +27,13 @@ public class ProductCommand {
 				private String option;
 			}
 		}
+	}
+	
+	@Getter
+	@AllArgsConstructor
+	@NoArgsConstructor
+	public static class ChangePrice {
+		private String id;
+		private Integer amount;
 	}
 }

@@ -23,4 +23,9 @@ public class ProductHandler {
 		return ServerResponse.created(URI.create("/"))
 				.body(productService.createProduct(request.bodyToMono(ProductCommand.Create.class)), Product.class);
 	}
+	
+	public Mono<ServerResponse> changePrice(ServerRequest request) {
+		return ServerResponse.ok()
+				.body(productService.changePrice(request.bodyToMono(ProductCommand.ChangePrice.class)), Void.class);
+	}
 }

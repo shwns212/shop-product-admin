@@ -1,0 +1,20 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://junsoo:123@182.209.85.228:30033/shop
+      
+  r2dbc:
+    url: r2dbc:postgresql://182.209.85.228:30032/shop
+    username: junsoo
+    password: 123
+    
+  kafka:
+    bootstrap-servers:
+    - 192.168.219.104:9092
+    producer:
+      acks: all
+logging:
+  level:
+    io.r2dbc.postgresql.QUERY: debug
+    
+    

@@ -1,6 +1,8 @@
 package com.jun.shop.event.model;
 
 
+import java.util.UUID;
+
 import com.jun.event.annotation.Identifier;
 
 import lombok.AllArgsConstructor;
@@ -12,6 +14,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PriceChanged {
 	@Identifier
-	private String id;
+	private UUID id;
 	private Integer amount;
 }

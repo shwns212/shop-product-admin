@@ -2,6 +2,7 @@ package com.jun.shop.event.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.jun.event.annotation.Identifier;
 import com.jun.shop.event.model.ProductCreated.ProductOption.Option;
@@ -16,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class ProductCreated {
 	
 	@Identifier
-	private String id;
+	private UUID id;
 	private String name;
 	private Integer price;
 	private List<ProductOption> options;
@@ -38,8 +39,8 @@ public class ProductCreated {
 		}
 	}
 
-	public ProductCreated(String id, String name, Integer price, List<ProductOptionCommand> options, String description) {
-		this.id = id;
+	public ProductCreated(UUID uuid, String name, Integer price, List<ProductOptionCommand> options, String description) {
+		this.id = uuid;
 		this.name = name;
 		this.price = price;
 		this.description = description;

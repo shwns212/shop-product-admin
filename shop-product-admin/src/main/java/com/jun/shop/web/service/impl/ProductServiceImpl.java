@@ -1,12 +1,14 @@
 package com.jun.shop.web.service.impl;
 
-import org.springframework.kafka.core.KafkaTemplate;
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 
 import com.jun.event.model.Event;
 import com.jun.event.service.EventService;
+import com.jun.message.message.Message;
+import com.jun.message.sender.MessageSender;
 import com.jun.shop.domain.aggregate.Product;
-import com.jun.shop.event.handler.ProductEventHandler;
 import com.jun.shop.model.command.ProductCommand.ChangePrice;
 import com.jun.shop.model.command.ProductCommand.Create;
 import com.jun.shop.web.service.ProductService;
@@ -18,35 +20,32 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
-	private final ProductEventHandler eventHandler;
 	private final EventService u;
-//	private final ProjectionService projectionService;
-	private final KafkaTemplate<String, String> templte;
+	private final MessageSender productMessageSender;
 	@Override
-	public Mono<Long> createProduct(Mono<Create> command) {
+	public Mono<UUID> createProduct(Mono<Create> command) {
 		
-		return command.map(x -> {
-			Mono.just("a");
+		return command.flatMap(x -> {
 			Mono<Event> mono = new Product().create(x,u);
-			mono
-			.switchIfEmpty(Mono.just(new Event()))
-			.subscribe(c -> {
-				System.out.println(c);
-			});
-			return 1L;
+			Mono<UUID> result = mono
+			.doOnSuccess(c -> {
+				Message message = new Message("createProduct", c);
+				productMessageSender.send(message);
+			})
+			.map(c -> c.getAggregateId());
+			return result;
 		});
 	}
 
 	@Override
-	public Mono<String> changePrice(Mono<ChangePrice> command) {
+	public Mono<UUID> changePrice(Mono<ChangePrice> command) {
 		return command.flatMap(x -> {
 			Mono<Product> product = u.findAggregate(Product.class, x.getId());
 			return product.map(m -> {
-//				m.priceChanged(x, u)
-//				.subscribe(c -> {
-//					System.out.println(c);
-//					projectionService.projection(c);
-//				});
+				m.priceChanged(x, u)
+				.subscribe(c -> {
+					System.out.println(c);
+				});
 				return m.getId();
 			});
 		});

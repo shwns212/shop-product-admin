@@ -1,6 +1,7 @@
 package com.jun.shop.domain.aggregate;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.jun.event.annotation.EventHandler;
 import com.jun.event.annotation.Identifier;
@@ -20,7 +21,7 @@ import reactor.core.publisher.Mono;
 @NoArgsConstructor
 public class Product {
 	@Identifier
-	private String id;
+	private UUID id;
 	private String name;
 	private Integer price;
 	private List<ProductOption> options;

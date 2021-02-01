@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.Test;
@@ -34,25 +35,25 @@ import reactor.core.publisher.Flux;
 public class TestClass {
 	@Test
 	public void tet() throws IOException, ClassNotFoundException {
-		
-		ClassPathScanningCandidateComponentProvider p = new ClassPathScanningCandidateComponentProvider(false);
-		p.addIncludeFilter(new RegexPatternTypeFilter(Pattern.compile(".*")));
-		p.findCandidateComponents("com.jun.shop").forEach(x -> {
-			try {
-				Class<?> c = Class.forName(x.getBeanClassName());
-				Annotation[] annotations = c.getAnnotations();
-				for(Annotation annotation : annotations) {
-					if(annotation.annotationType().equals(KafkaController.class)) {
-						System.out.println(c.getName());
-					}
-				}
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-//			System.out.println(x.getClass().getName());
-		});
-		
+		System.out.println(UUID.fromString("aaaasdd"));
+//		ClassPathScanningCandidateComponentProvider p = new ClassPathScanningCandidateComponentProvider(false);
+//		p.addIncludeFilter(new RegexPatternTypeFilter(Pattern.compile(".*")));
+//		p.findCandidateComponents("com.jun.shop").forEach(x -> {
+//			try {
+//				Class<?> c = Class.forName(x.getBeanClassName());
+//				Annotation[] annotations = c.getAnnotations();
+//				for(Annotation annotation : annotations) {
+//					if(annotation.annotationType().equals(KafkaController.class)) {
+//						System.out.println(c.getName());
+//					}
+//				}
+//			} catch (ClassNotFoundException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+////			System.out.println(x.getClass().getName());
+//		});
+//		
 //		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 //		String paht = "com.jun.shop.event.util";
 //		Enumeration<URL> e = classLoader.getResources("com.jun.shop.event.util".replace(".", "/"));

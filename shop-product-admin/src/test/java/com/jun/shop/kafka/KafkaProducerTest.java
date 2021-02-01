@@ -25,14 +25,14 @@ public class KafkaProducerTest {
 	
 	@Test
 	public void test() throws Exception {
-		ProductCommand.ChangePrice command = new ProductCommand.ChangePrice("86cad83f-9ab9-4f2b-962a-75669a788b3f", 200);
-		KafkaMessageTemplate template2 = new KafkaMessageTemplate("test", command);
-		KafkaRequest req = new KafkaRequest("test", mapper.writeValueAsString(command));
-		Map<String,Object> map = new HashMap<>();
-		map.put("type", "priceChange");
-		map.put("payload", command);
-		template.send("product", req.serialize());
-//		template.send("product", mapper.writeValueAsString(template2));
-		System.out.println(template);
+//		ProductCommand.ChangePrice command = new ProductCommand.ChangePrice("86cad83f-9ab9-4f2b-962a-75669a788b3f", 200);
+//		KafkaMessageTemplate template2 = new KafkaMessageTemplate("test", command);
+//		KafkaRequest req = new KafkaRequest("test", mapper.writeValueAsString(command));
+//		Map<String,Object> map = new HashMap<>();
+//		map.put("type", "priceChange");
+//		map.put("payload", command);
+//		template.send("product", req.serialize());
+////		template.send("product", mapper.writeValueAsString(template2));
+//		System.out.println(template);
 	}
 }

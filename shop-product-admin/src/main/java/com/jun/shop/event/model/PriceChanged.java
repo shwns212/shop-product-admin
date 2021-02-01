@@ -1,6 +1,7 @@
 package com.jun.shop.event.model;
 
-import com.jun.shop.event.util.Identifier;
+
+import com.jun.event.annotation.Identifier;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,20 +1,16 @@
 package com.jun.shop.domain.aggregate;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
+import com.jun.event.annotation.EventHandler;
+import com.jun.event.annotation.Identifier;
+import com.jun.event.model.Event;
+import com.jun.event.service.EventService;
 import com.jun.shop.domain.ProductOption;
-import com.jun.shop.event.EventHandler;
 import com.jun.shop.event.model.PriceChanged;
 import com.jun.shop.event.model.ProductCreated;
-import com.jun.shop.event.util.Event;
-import com.jun.shop.event.util.EventUtils;
-import com.jun.shop.event.util.Identifier;
 import com.jun.shop.model.command.ProductCommand;
 import com.jun.shop.model.command.ProductCommand.ChangePrice;
-import com.jun.shop.model.command.ProductCommand.Create;
-import com.jun.shop.model.command.ProductCommand.Create.ProductOptionCommand;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,7 +28,7 @@ public class Product {
 	
 	
 	
-	public Product(ProductCommand.Create command, EventUtils utils) {
+	public Product(ProductCommand.Create command, EventService utils) {
 		utils.saveEvent(new ProductCreated(command.getId(), command.getName(), command.getPrice(), command.getOptions(), command.getDescription())
 				,this.getClass());
 	}
@@ -51,7 +47,7 @@ public class Product {
 		this.description = event.getDescription();
 	}
 
-	public Mono<Event> priceChanged(ChangePrice command, EventUtils utils) {
+	public Mono<Event> priceChanged(ChangePrice command, EventService utils) {
 		return utils.saveEvent(new PriceChanged(command.getId(), command.getAmount()), this.getClass());
 //		utils.saveEvent(command.getId(), this.getClass(), new PriceChanged(command.getId(), command.getAmount()));
 	}
@@ -61,7 +57,7 @@ public class Product {
 		this.price -= event.getAmount();
 	}
 
-	public Mono<Event> create(ProductCommand.Create command, EventUtils utils) {
+	public Mono<Event> create(ProductCommand.Create command, EventService utils) {
 		return utils.saveEvent(new ProductCreated(command.getId(), command.getName(), command.getPrice(), command.getOptions(), command.getDescription())
 				,this.getClass());
 	}

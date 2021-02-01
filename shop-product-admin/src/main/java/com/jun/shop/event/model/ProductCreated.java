@@ -3,8 +3,8 @@ package com.jun.shop.event.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jun.event.annotation.Identifier;
 import com.jun.shop.event.model.ProductCreated.ProductOption.Option;
-import com.jun.shop.event.util.Identifier;
 import com.jun.shop.model.command.ProductCommand.Create.ProductOptionCommand;
 
 import lombok.AllArgsConstructor;

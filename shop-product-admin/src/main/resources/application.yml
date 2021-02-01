@@ -16,5 +16,6 @@ spring:
 logging:
   level:
     io.r2dbc.postgresql.QUERY: debug
+    io.r2dbc.postgresql.PARAM: debug
     
     

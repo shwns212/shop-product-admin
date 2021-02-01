@@ -3,12 +3,10 @@ package com.jun.shop.web.service.impl;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.StringKeySerializer;
+import com.jun.event.model.Event;
+import com.jun.event.service.EventService;
 import com.jun.shop.domain.aggregate.Product;
 import com.jun.shop.event.handler.ProductEventHandler;
-import com.jun.shop.event.util.Event;
-import com.jun.shop.event.util.EventUtils;
-import com.jun.shop.event.util.ProjectionService;
 import com.jun.shop.model.command.ProductCommand.ChangePrice;
 import com.jun.shop.model.command.ProductCommand.Create;
 import com.jun.shop.web.service.ProductService;
@@ -21,20 +19,20 @@ import reactor.core.publisher.Mono;
 public class ProductServiceImpl implements ProductService {
 
 	private final ProductEventHandler eventHandler;
-	private final EventUtils u;
-	private final ProjectionService projectionService;
+	private final EventService u;
+//	private final ProjectionService projectionService;
 	private final KafkaTemplate<String, String> templte;
 	@Override
 	public Mono<Long> createProduct(Mono<Create> command) {
 		
 		return command.map(x -> {
 			Mono.just("a");
-//			Product product = new Product(x,u); // aggregate »ý¼º
 			Mono<Event> mono = new Product().create(x,u);
-			mono.subscribe(c -> {
-				projectionService.projection(c);
+			mono
+			.switchIfEmpty(Mono.just(new Event()))
+			.subscribe(c -> {
+				System.out.println(c);
 			});
-//			eventHandler.create(product); // event handle
 			return 1L;
 		});
 	}

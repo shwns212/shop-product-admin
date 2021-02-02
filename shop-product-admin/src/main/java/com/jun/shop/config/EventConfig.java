@@ -26,6 +26,6 @@ public class EventConfig {
 //		config.put("host", "r2dbc:postgresql://182.209.85.228");
 ////		config.put("host", "r2dbc:postgresql://182.209.85.228:30032/shop");
 //		return new EventService(dbClient);
-		return new EventService(dbClient);
+		return new EventService(dbClient, 10);
 	}
 }

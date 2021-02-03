@@ -3,6 +3,9 @@ package com.jun.shop.domain.aggregate;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.jun.event.annotation.EventHandler;
 import com.jun.event.annotation.Identifier;
 import com.jun.event.model.Event;
@@ -19,7 +22,9 @@ import reactor.core.publisher.Mono;
 
 @Getter
 @NoArgsConstructor
+@Document(collection = "product")
 public class Product {
+	@Id
 	@Identifier
 	private UUID id;
 	private String name;

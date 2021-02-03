@@ -1,6 +1,5 @@
 package com.jun.shop;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
@@ -8,23 +7,16 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Method;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.UUID;
-import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
-import org.springframework.core.type.filter.RegexPatternTypeFilter;
-import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jun.shop.kafka.annotation.KafkaController;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
